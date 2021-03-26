@@ -11,8 +11,6 @@ endif()
 # static libarary
 # add_compile_options(-static)
 
-include_directories(../include)
-
 set(COMMON_SOURCES ../src/SerialPort.cpp ../src/SerialPortBase.cpp ../src/SerialPortInfo.cpp ../src/SerialPortInfoBase.cpp)
 
 if (CMAKE_HOST_WIN32)
@@ -40,6 +38,8 @@ elseif(APPLE)
 elseif (CMAKE_HOST_UNIX)
 	target_link_libraries( ${LIB_NAME} pthread )
 endif()
+
+target_include_directories(${LIB_NAME} PUBLIC ../include)
 
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/CSerialPort DESTINATION include FILES_MATCHING PATTERN "*.h")
 
